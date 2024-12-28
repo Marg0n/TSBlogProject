@@ -1,6 +1,6 @@
-// const express = require("express");
 import cors from 'cors';
-import express, { Application, Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
+import globalErrorHandler from './app/middleware/globalErrorHandler';
 const app: Application = express();
 
 // parsers
@@ -8,8 +8,8 @@ app.use(express.json());
 app.use(cors());
 
 // middleware
-// app.use('/api/products', productRouter)
-// app.use('/api/orders', orderRouter);
+// app.use('/api', userRouter)
+// app.use('/api', blogRouter);
 
 app.get('/', (req: Request, res: Response) => {
   try {
@@ -28,5 +28,7 @@ app.get('/', (req: Request, res: Response) => {
   }
 });
 
+// global error handler
+app.use(globalErrorHandler);
 
 export default app;
