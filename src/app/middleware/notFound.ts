@@ -14,3 +14,5 @@ const notFound = (
     error: '',
   });
 };
+
+export default notFound;
