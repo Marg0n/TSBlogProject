@@ -7,7 +7,7 @@ const notFound = (
   res: Response,
   next: NextFunction,
 ) => {
-  res.status(HttpStatus.NOT_FOUND).send({
+  res.status(HttpStatus.NOT_FOUND).json({
     success: false,
     message: 'API Not Found',
     statusCode: HttpStatus.NOT_FOUND, // or other relevant HTTP status code
