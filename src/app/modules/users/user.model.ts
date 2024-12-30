@@ -6,22 +6,25 @@ const userSchema = new Schema<IUser>({
     name: {
         type: String,
         trim: true,
-        required: true
+        required: [true, 'Please provide a name.'],
     },
     email: {
         type: String,
         trim: true,
-        required: true,
+        required: [true, 'Please provide email address.'],
         unique: true
     },
     password: {
         type: String,
         trim: true,
-        required: true
+        required: [true, 'Please provide a password.']
     },
     role: {
         type: String,
-        enum: ["admin", "user"],
+        enum: {
+            values: ["admin", "user"],
+            message: '{VALUE} is not valid. Please provide a valid type.',
+        },
         default: "user"
     },
     isBlocked: {
@@ -41,3 +44,5 @@ userSchema.pre<IUser>("findOneAndUpdate", function (next) {
 });
 
 const User = model<IUser>("User", userSchema);
+
+export default User;
