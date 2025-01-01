@@ -2,6 +2,7 @@ import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import globalErrorHandler from './app/middleware/globalErrorHandler';
 import notFound from './app/middleware/notFound';
+import userRouter from './app/modules/users/user.router';
 const app: Application = express();
 
 // parsers
@@ -9,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 // middleware
-// app.use('/api', userRouter)
+app.use('/api', userRouter);
 // app.use('/api', blogRouter);
 
 app.get('/', (req: Request, res: Response) => {

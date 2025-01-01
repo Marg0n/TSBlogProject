@@ -1,5 +1,4 @@
 import { Response } from 'express';
-import { HttpStatus } from 'http-status-ts';
 
 type TSuccessResponse<T> = {
     success: boolean,
