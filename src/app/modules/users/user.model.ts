@@ -25,6 +25,7 @@ const userSchema = new Schema<IUser>({
             values: ["admin", "user"],
             message: '{VALUE} is not valid. Please provide a valid type.',
         },
+        required: [true, 'Please provide a role.'],
         default: "user"
     },
     isBlocked: {

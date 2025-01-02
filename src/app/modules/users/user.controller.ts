@@ -11,7 +11,7 @@ const registerUser = async function (req: Request, res: Response) {
     return res.status(HttpStatus.CREATED).json({
       success: true,
       message: 'User registered successfully',
-      statusCode: 201,
+      statusCode: HttpStatus.CREATED,
       data: {
         _id: result._id,
         name: result.name,
@@ -23,9 +23,7 @@ const registerUser = async function (req: Request, res: Response) {
       success: false,
       message: 'Validation error',
       statusCode: HttpStatus.BAD_REQUEST,
-      error: {
-        details: error.message,
-    },
+      error: error.message,
       stack: error.stack,
     });
   }
