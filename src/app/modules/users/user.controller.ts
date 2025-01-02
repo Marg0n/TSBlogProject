@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import User from './user.model';
-import { HttpStatus } from 'http-status-ts';
+import HttpStatus from 'http-status-codes';
 
 const registerUser = async function (req: Request, res: Response) {
   try {

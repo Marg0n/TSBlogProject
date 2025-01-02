@@ -2,7 +2,8 @@ import globals from "globals";
 import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import tsParser from "@typescript-eslint/parser";
-const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
+// const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
+import eslintConfigPrettier from 'eslint-config-prettier'
 
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -10,13 +11,14 @@ export default [
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   { 
     languageOptions: { 
-      globals: globals.node,// Specifies the global variables, making them read-only as required by the flat config system.
+      globals: { ...globals.browser, ...globals.node },// Specifies the global variables, making them read-only as required by the flat config system.
       parser: tsParser, // Sets the parser for TypeScript files to ensure ESLint can parse TypeScript syntax correctly.
     } 
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  eslintPluginPrettierRecommended,
+  // eslintPluginPrettierRecommended,  
+  eslintConfigPrettier,
   {
     ignores: [".node_modules/*", "dist/*"],
     rules: {

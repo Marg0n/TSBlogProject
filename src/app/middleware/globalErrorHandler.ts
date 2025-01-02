@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { HttpStatus } from "http-status-ts";
+import HttpStatus from 'http-status-codes';
 
 
 const globalErrorHandler = (

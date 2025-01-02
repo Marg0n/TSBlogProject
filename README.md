@@ -354,15 +354,16 @@
   }
   ```
 
-- [npm i http-status-ts](https://www.npmjs.com/package/http-status-ts)
+<!-- - [npm i http-status-ts](https://www.npmjs.com/package/http-status-ts)
 
   HTTP Status codes for Node.js for utility to interact with HTTP status codes.
 
   ```bash
   npm i http-status-ts
-  ```
+  ``` -->
 
-  Then install the main version of it [http-status-codes](https://www.npmjs.com/package/http-status-codes)
+- [http-status-codes](https://www.npmjs.com/package/http-status-codes)
+
   ```bash
   npm i http-status-codes
   ```
