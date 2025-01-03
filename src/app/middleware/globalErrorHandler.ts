@@ -8,11 +8,11 @@ const globalErrorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+  res.status(err.statusCode).json({
     success: false,
     message: 'Something went wrong!',
-    statusCode: HttpStatus.INTERNAL_SERVER_ERROR, // or other relevant HTTP status code
-    error: { details: 'Internal Server Error' },
+    statusCode: err.statusCode, // or other relevant HTTP status code
+    error: err,
     stack: err.stack,
   });
 };

@@ -23,7 +23,7 @@ const registerUser = async function (req: Request, res: Response) {
       success: false,
       message: 'Validation error',
       statusCode: HttpStatus.BAD_REQUEST,
-      error: error.message,
+      error: error,
       stack: error.stack,
     });
   }
