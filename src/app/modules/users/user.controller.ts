@@ -29,6 +29,32 @@ const registerUser = async function (req: Request, res: Response) {
   }
 };
 
+const loginUser = async function (req: Request, res: Response) {
+  try {
+    const user = await req.body;
+
+    const result = await userService.loginUser(user);
+
+    return res.status(HttpStatus.CREATED).json({
+      success: true,
+      message: 'Login successful',
+      statusCode: HttpStatus.CREATED,
+      data: {
+        token: "token",
+      },
+    });
+  } catch (error: any) {
+    return res.status(HttpStatus.UNAUTHORIZED).json({
+      success: false,
+      message: 'Invalid credentials',
+      statusCode: HttpStatus.UNAUTHORIZED,
+      error: error,
+      stack: error.stack,
+    });
+  }
+};
+
 export const userController = {
     registerUser,
+    loginUser,
 };

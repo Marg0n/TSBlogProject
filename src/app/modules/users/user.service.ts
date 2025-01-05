@@ -10,6 +10,15 @@ const registereUser = async (user: IUser): Promise<IUser> => {
     return result;
 }
 
+// Login a user
+const loginUser = async (user: IUser): Promise<IUser> => {
+
+    const result = await User.create(user);
+
+    return result;
+}
+
 export const userService = {
     registereUser,
+    loginUser,
 };
