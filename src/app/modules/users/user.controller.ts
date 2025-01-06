@@ -29,11 +29,11 @@ const registerUser = async function (req: Request, res: Response) {
   }
 };
 
-const loginUser = async function (req: Request, res: Response) {
+const getUser = async function (req: Request, res: Response) {
   try {
     const user = await req.body;
 
-    const result = await userService.loginUser(user);
+    const result = await userService.getUser(user);
 
     return res.status(HttpStatus.CREATED).json({
       success: true,
@@ -56,5 +56,5 @@ const loginUser = async function (req: Request, res: Response) {
 
 export const userController = {
     registerUser,
-    loginUser,
+    getUser,
 };

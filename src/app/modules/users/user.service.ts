@@ -11,7 +11,7 @@ const registereUser = async (user: IUser): Promise<IUser> => {
 }
 
 // Login a user
-const loginUser = async (user: IUser): Promise<IUser> => {
+const getUser = async (user: IUser): Promise<IUser> => {
 
     const result = await User.create(user);
 
@@ -20,5 +20,5 @@ const loginUser = async (user: IUser): Promise<IUser> => {
 
 export const userService = {
     registereUser,
-    loginUser,
+    getUser,
 };
