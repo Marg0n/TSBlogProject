@@ -3,22 +3,22 @@ import User from "./user.model";
 
 
 // Register a new user
-const registereUser = async (user: IUser): Promise<IUser> => {
+const registerUser = async (user: IUser): Promise<IUser> => {
 
     const result = await User.create(user);
 
     return result;
 }
 
-// Login a user
-const getUser = async (user: IUser): Promise<IUser> => {
+// find/get a user
+const getUser = async () => {
 
-    const result = await User.create(user);
+    const result = await User.find();
 
     return result;
 }
 
 export const userService = {
-    registereUser,
+    registerUser,
     getUser,
 };

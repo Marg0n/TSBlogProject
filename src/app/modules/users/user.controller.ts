@@ -2,11 +2,12 @@ import { Request, Response } from 'express';
 import HttpStatus from 'http-status-codes';
 import { userService } from './user.service';
 
+// register a user
 const registerUser = async function (req: Request, res: Response) {
   try {
     const user = await req.body;
 
-    const result = await userService.registereUser(user);
+    const result = await userService.registerUser(user);
 
     return res.status(HttpStatus.CREATED).json({
       success: true,
@@ -29,16 +30,16 @@ const registerUser = async function (req: Request, res: Response) {
   }
 };
 
+// get all users
 const getUser = async function (req: Request, res: Response) {
   try {
-    const user = await req.body;
 
-    const result = await userService.getUser(user);
+    const user = await userService.getUser();
 
-    return res.status(HttpStatus.CREATED).json({
+    return res.status(HttpStatus.OK).json({
       success: true,
       message: 'Login successful',
-      statusCode: HttpStatus.CREATED,
+      statusCode: HttpStatus.OK,
       data: {
         token: "token",
       },
