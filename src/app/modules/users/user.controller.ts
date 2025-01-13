@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import HttpStatus from 'http-status-codes';
 import { userService } from './user.service';
+import sendResponse from '../../../utils/sendResponse';
 
 // register a user
 const registerUser = async function (req: Request, res: Response) {
@@ -9,8 +10,7 @@ const registerUser = async function (req: Request, res: Response) {
 
     const result = await userService.registerUser(user);
 
-    return res.status(HttpStatus.CREATED).json({
-      success: true,
+    sendResponse(res, {
       message: 'User registered successfully',
       statusCode: HttpStatus.CREATED,
       data: {
@@ -19,6 +19,17 @@ const registerUser = async function (req: Request, res: Response) {
         email: result.email,
       },
     });
+
+    // return res.status(HttpStatus.CREATED).json({
+    //   success: true,
+    //   message: 'User registered successfully',
+    //   statusCode: HttpStatus.CREATED,
+    //   data: {
+    //     _id: result._id,
+    //     name: result.name,
+    //     email: result.email,
+    //   },
+    // });
   } catch (error: any) {
     return res.status(HttpStatus.BAD_REQUEST).json({
       success: false,
