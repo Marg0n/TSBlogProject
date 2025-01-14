@@ -6,11 +6,11 @@ const globalErrorHandler = (
   err: any,
   req: Request,
   res: Response,
-  next: NextFunction,
+  next?: NextFunction,
 ) => {
-  res.status(err.statusCode).json({
+  res.status(HttpStatus.BAD_REQUEST).json({
     success: false,
-    message: 'Something went wrong!',
+    message: err.message || 'Something went wrong!',
     statusCode: err.statusCode, // or other relevant HTTP status code
     error: err,
     stack: err.stack,

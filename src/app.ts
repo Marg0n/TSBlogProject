@@ -1,8 +1,10 @@
 import cors from 'cors';
-import express, { Application, Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import globalErrorHandler from './app/middleware/globalErrorHandler';
 import notFound from './app/middleware/notFound';
 import userRouter from './app/modules/users/user.router';
+import sendResponse from './utils/sendResponse';
+import HttpStatus from 'http-status-codes';
 const app: Application = express();
 
 // parsers
@@ -13,20 +15,22 @@ app.use(cors());
 app.use('/api', userRouter);
 // app.use('/api', blogRouter);
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.status(200).send({
-      success: true,
+    sendResponse(res,{
       message: 'Server is running! ⚡',
+      statusCode: HttpStatus.OK,
+      data: null,
     });
   } 
   catch (err: any) {
-    res.status(500).send({
-      message: err.message || 'Something went wrong!',
-      success: false,
-      error: err.errors,
-      stack: err.stack,
-    });
+    next(err);
+    // res.status(500).send({
+    //   message: err.message || 'Something went wrong!',
+    //   success: false,
+    //   error: err.errors,
+    //   stack: err.stack,
+    // });
   }
 });
 
