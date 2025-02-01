@@ -26,7 +26,7 @@ const registerUser = catchAsync(async function (req, res) {
 
 // get all users
 const getUser = catchAsync(async function (req, res) {
-  
+
     const user = await userService.getUser();
 
     return res.status(HttpStatus.OK).json({
@@ -35,10 +35,11 @@ const getUser = catchAsync(async function (req, res) {
       statusCode: HttpStatus.OK,
       data: {
         token: 'token',
+        user: user,
       },
     });
-  
 });
+
 
 export const userController = {
   registerUser,
