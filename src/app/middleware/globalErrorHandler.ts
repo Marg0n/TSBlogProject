@@ -29,6 +29,16 @@ const globalErrorHandler = (
       stack: err.stack,
     });
   }
+  // validation error
+  else if (err instanceof mongoose.Error.ValidationError) {
+    res.status(HttpStatus.BAD_REQUEST).json({
+      success: false,
+      message: err.message,
+      statusCode: HttpStatus.BAD_REQUEST, // or other relevant HTTP status code
+      error: err,
+      stack: err.stack,
+    });
+  }
   // duplicate error
   else if (err.code && err.code === 11000) {
     res.status(err.statusCode || HttpStatus.BAD_REQUEST).json({
