@@ -14,25 +14,37 @@ type TErrorResponse = {
 };
 
 const globalErrorHandler = (
-  err: TErrorResponse,
+  err: TErrorResponse | any,
   req: Request,
   res: Response,
   next?: NextFunction,
 ) => {
+  // cast error
   if (err instanceof mongoose.Error.CastError) {
-    res.status(err.statusCode || HttpStatus.BAD_REQUEST).json({
+    res.status(HttpStatus.BAD_REQUEST).json({
       success: false,
       message: err.message,
+      statusCode: HttpStatus.BAD_REQUEST, // or other relevant HTTP status code
+      error: err,
+      stack: err.stack,
+    });
+  }
+  // duplicate error
+  else if (err.code && err.code === 11000) {
+    res.status(err.statusCode || HttpStatus.BAD_REQUEST).json({
+      success: false,
+      message: err.errorResponse.errmsg,
       statusCode: err.statusCode || HttpStatus.BAD_REQUEST, // or other relevant HTTP status code
       error: err,
       stack: err.stack,
     });
   }
+  // generic error
   else if (err instanceof Error) {
-    res.status(err.statusCode || HttpStatus.INTERNAL_SERVER_ERROR).json({
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
       success: false,
       message: err.message || 'Something went wrong!',
-      statusCode: err.statusCode || HttpStatus.INTERNAL_SERVER_ERROR, // or other relevant HTTP status code
+      statusCode: HttpStatus.INTERNAL_SERVER_ERROR, // or other relevant HTTP status code
       error: err,
       stack: err.stack,
     });
