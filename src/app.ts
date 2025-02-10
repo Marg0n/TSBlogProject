@@ -16,14 +16,13 @@ app.use('/api', router);
 
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
   try {
-    sendResponse(res,{
+    sendResponse(res, {
       message: 'Server is running! ⚡',
       statusCode: HttpStatus.OK,
       data: null,
     });
-  } 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  catch (err: any) {
+  } catch (err: any) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     next(err);
     // res.status(500).send({
     //   message: err.message || 'Something went wrong!',
@@ -37,7 +36,16 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 // global error handler
 app.use(globalErrorHandler);
 
+// route not found
+app.use('*', (req: Request, res: Response) => {
+  res.status(HttpStatus.FORBIDDEN).send({
+    success: false,
+    message: 'Route not found!',
+    status: HttpStatus.FORBIDDEN,
+  });
+});
+
 // not found
-app.use(notFound)
+app.use(notFound);
 
 export default app;
