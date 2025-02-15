@@ -4,6 +4,7 @@
 import { NextFunction, Request, Response } from 'express';
 import HttpStatus from 'http-status-codes';
 import mongoose from 'mongoose';
+import { handleZodErrors } from '../../helpers/handleZodErrors';
 
 type TErrorResponse = {
   success: boolean;
@@ -19,8 +20,12 @@ const globalErrorHandler = (
   res: Response,
   next?: NextFunction,
 ) => {
+  // zod error
+  if (err.name && err.name === 'ZodError') {
+    handleZodErrors(err, res) 
+  }
   // cast error
-  if (err instanceof mongoose.Error.CastError) {
+  else if (err instanceof mongoose.Error.CastError) {
     res.status(HttpStatus.BAD_REQUEST).json({
       success: false,
       message: err.message,
